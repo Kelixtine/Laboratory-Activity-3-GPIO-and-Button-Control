@@ -44,9 +44,13 @@ The button uses the ESP32's internal pull-up resistor through `INPUT_PULLUP`. Wh
 
 ## Circuit Diagram
 
+> **Disclaimer:** The following circuit diagram is a visual representation of the intended wiring and connections for the laboratory activity. It is not a photograph of the actual physical project setup.
+
 <img src="./circuit-diagram.png" width="828" alt="ESP32 GPIO and button control circuit diagram" />
 
 ## Project Setup
+
+> **Disclaimer:** The following images show the actual physical project setup used for this laboratory activity. The arrangement and appearance of the components may vary slightly depending on the breadboard and wiring.
 
 <img src="./0e73ad4f-2b6d-4a9a-9653-0d8363593c35.jpg" width="490" alt="Actual project setup" />
 
@@ -83,3 +87,57 @@ void loop() {
     digitalWrite(LED2_PIN, LOW);
   }
 }
+```
+
+## Observation
+
+When the button is **released**:
+
+- Button state = `HIGH`
+- LED 1 = **ON**
+- LED 2 = **OFF**
+
+When the button is **pressed**:
+
+- Button state = `LOW`
+- LED 1 = **OFF**
+- LED 2 = **ON**
+
+## Observation Summary
+
+| **Button State** | **Input Logic** | **LED 1 (GPIO 18)** | **LED 2 (GPIO 19)** |
+| ---------------- | --------------- | ------------------- | ------------------- |
+| Released         | HIGH            | ON                  | OFF                 |
+| Pressed          | LOW             | OFF                 | ON                  |
+
+## How to Run the Project
+
+1. Connect the ESP32 and other components based on the wiring table.
+2. Connect the ESP32 to your computer using a USB cable.
+3. Open the project in Arduino IDE or PlatformIO.
+4. Select the correct ESP32 board and COM port.
+5. Upload the source code to the ESP32.
+6. Wait for the board to restart.
+7. Observe the LEDs and press the push button to test their behavior.
+
+## Expected Output
+
+- When the button is released, LED 1 turns ON and LED 2 turns OFF.
+- When the button is pressed, LED 1 turns OFF and LED 2 turns ON.
+- The LEDs change their states depending on the button's condition.
+
+## Documentation Video
+
+The project documentation video is included in this repository as:
+
+**`documentation.mp4`**
+
+The video demonstrates the actual operation of the ESP32 GPIO and button-controlled LED circuit.
+
+## Conclusion
+
+This activity demonstrates how GPIO pins work as digital inputs and outputs. By using the internal pull-up resistor and `if/else` statements, the push button can control two LEDs with opposite behavior. It also provides a basic understanding of how to read button inputs and control electronic components using an ESP32.
+
+## Disclaimer
+
+This README file is intended for educational and documentation purposes. The circuit diagram is a visual representation of the intended circuit, while the project setup images show the physical project used for the laboratory activity.
