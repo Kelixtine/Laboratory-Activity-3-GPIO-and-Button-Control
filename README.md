@@ -2,49 +2,55 @@
 
 ## Overview
 
-This project demonstrates the use of GPIO pins for digital input and output using an ESP32 microcontroller. A push button is used to control two LEDs that work in opposite states. The activity uses the internal pull-up resistor (`INPUT_PULLUP`) and `if/else` statements to control the LEDs based on the button's condition.
+This laboratory activity demonstrates the use of **GPIO (General Purpose Input/Output)** on an ESP32 microcontroller. A push button is used as a digital input to control two LEDs as digital outputs.
 
-## Project Features
+The button uses the ESP32's internal pull-up resistor through `INPUT_PULLUP`. When the button is pressed, the two LEDs change their states using an `if/else` condition.
 
-* **Internal Pull-Up Resistor:** Uses `INPUT_PULLUP` on GPIO 23 to keep the input HIGH when the button is released.
-* **Opposite LED Behavior:** LED 1 turns ON when the button is released, while LED 2 turns ON when the button is pressed.
-* **If/Else Statements:** Uses conditional statements to control the LEDs.
-* **Digital Input and Output:** Demonstrates how a push button and LEDs work with GPIO pins.
+## Features
 
-## Hardware Components
+* Uses ESP32 GPIO pins for digital input and output
+* Uses the internal pull-up resistor on GPIO 23
+* LED 1 turns **ON** when the button is released
+* LED 2 turns **ON** when the button is pressed
+* Uses an `if/else` statement for button control
+* Demonstrates basic digital GPIO operation
 
-* 1x ESP32 Microcontroller
-* 1x Tactile Push Button
-* 2x LEDs
-* 2x 100Ω Resistors
-* 1x Breadboard
-* Jumper Wires
-* 1x USB Cable
+## Components
 
-## Pin Wiring Connections
+* ESP32 development board
+* Tactile push button
+* 2 × LEDs
+* 2 × 100Ω resistors
+* Breadboard
+* Jumper wires
+* USB cable
 
-| Component   | Pin         | Connection                      |
-| ----------- | ----------- | ------------------------------- |
-| Push Button | Terminal 1  | GPIO 23                         |
-| Push Button | Terminal 2  | GND                             |
-| LED 1       | Anode (+)   | GPIO 18 through a 100Ω resistor |
-| LED 1       | Cathode (-) | GND                             |
-| LED 2       | Anode (+)   | GPIO 19 through a 100Ω resistor |
-| LED 2       | Cathode (-) | GND                             |
+## Wiring
+
+### Push Button
+
+* Button terminal 1 → ESP32 GPIO 23
+* Button terminal 2 → GND
+
+### LED 1
+
+* Anode → GPIO 18 through a 100Ω resistor
+* Cathode → GND
+
+### LED 2
+
+* Anode → GPIO 19 through a 100Ω resistor
+* Cathode → GND
 
 ## Circuit Diagram
 
-**Disclaimer:** The image below is intended for documentation and reference purposes. Your actual circuit setup may look different depending on your wiring and components.
-
-<img width="828" height="343" alt="image" src="https://github.com/user-attachments/assets/8cf218b7-205e-4201-8148-3a6a160d3db7" />
-
+<img src="./0e73ad4f-2b6d-4a9a-9653-0d8363593c35.jpg" width="828" alt="Actual ESP32 circuit setup" />
 
 ## Project Setup
 
-**Disclaimer:** The following image is a placeholder for the actual hardware setup. Replace it with your own project photo to show your completed activity.
+<img src="./5dc8f2cc-fa6d-4328-a0e0-7b14e3ad908c.jpg" width="490" alt="Actual project setup" />
 
-<img width="490" height="428" alt="image" src="https://github.com/user-attachments/assets/cbbf6543-ca03-4700-9aef-237fe1ee28f2" />
-
+<img src="./6ac119c6-5a0d-408e-ae6a-f07a8956d50c.jpg" width="490" alt="Actual ESP32 project setup" />
 
 ## Source Code
 
@@ -56,13 +62,10 @@ const uint8_t LED1_PIN = 18;
 const uint8_t LED2_PIN = 19;
 
 void setup() {
-  // Enable the internal pull-up resistor
   pinMode(BUTTON_PIN, INPUT_PULLUP);
-
   pinMode(LED1_PIN, OUTPUT);
   pinMode(LED2_PIN, OUTPUT);
 
-  // Set the initial LED states
   digitalWrite(LED1_PIN, HIGH);
   digitalWrite(LED2_PIN, LOW);
 }
@@ -70,46 +73,61 @@ void setup() {
 void loop() {
   int buttonState = digitalRead(BUTTON_PIN);
 
-  // Check the button state
   if (buttonState == LOW) {
-    // When the button is pressed
     digitalWrite(LED1_PIN, LOW);
     digitalWrite(LED2_PIN, HIGH);
   } else {
-    // When the button is released
     digitalWrite(LED1_PIN, HIGH);
     digitalWrite(LED2_PIN, LOW);
   }
 }
 ```
 
-## Observation Summary
+## Observation
 
-| Button State | Input Logic | LED 1 (GPIO 18) | LED 2 (GPIO 19) |
-| ------------ | ----------- | --------------- | --------------- |
-| Released     | HIGH        | ON              | OFF             |
-| Pressed      | LOW         | OFF             | ON              |
+When the button is **released**:
 
-## How to Run the Project
+* Button state = `HIGH`
+* LED 1 = **ON**
+* LED 2 = **OFF**
 
-1. Connect the ESP32 and other components based on the wiring table.
-2. Connect the ESP32 to your computer using a USB cable.
-3. Open the project in Arduino IDE or PlatformIO.
+When the button is **pressed**:
+
+* Button state = `LOW`
+* LED 1 = **OFF**
+* LED 2 = **ON**
+
+## How to Run
+
+1. Connect the ESP32 and all components according to the wiring instructions.
+2. Connect the ESP32 to the computer using a USB cable.
+3. Open the project in **PlatformIO** or Arduino IDE.
 4. Select the correct ESP32 board and COM port.
-5. Upload the source code to the ESP32.
-6. Wait for the board to restart.
-7. Observe the LEDs and press the push button to test their behavior.
+5. Upload the program to the ESP32.
+6. Restart the board if necessary.
+7. Press and release the button to observe the LEDs changing states.
 
 ## Expected Output
 
-* When the button is released, LED 1 turns ON and LED 2 turns OFF.
-* When the button is pressed, LED 1 turns OFF and LED 2 turns ON.
-* The LEDs change their states depending on the button's condition.
+| Button State | GPIO 23 | LED 1 | LED 2 |
+| ------------ | ------- | ----- | ----- |
+| Released     | HIGH    | ON    | OFF   |
+| Pressed      | LOW     | OFF   | ON    |
+
+## Documentation Video
+
+The project documentation video is included in this repository as:
+
+**`documentation.mp4`**
+
+The video demonstrates the actual operation of the ESP32 GPIO and button-controlled LED circuit.
 
 ## Conclusion
 
-This activity demonstrates how GPIO pins work as digital inputs and outputs. By using the internal pull-up resistor and `if/else` statements, the push button can control two LEDs with opposite behavior. It also provides a basic understanding of how to read button inputs and control electronic components using an ESP32.
+This laboratory activity demonstrates the basic operation of digital GPIO on the ESP32. The push button is configured as a digital input using the internal pull-up resistor, while two LEDs are configured as digital outputs. The `if/else` statement determines the LED states based on the button's input.
+
+Through this activity, the use of **digital input, digital output, GPIO pins, internal pull-up resistors, and conditional statements** was demonstrated.
 
 ## Disclaimer
 
-This README file is intended for educational and documentation purposes. The images and circuit diagrams should represent the actual project whenever possible. Any sample images or placeholders should be replaced with the actual results of the activity.
+This project is intended for educational and laboratory documentation purposes. The images included in this README represent the actual project setup.
